@@ -37,6 +37,7 @@ namespace quizlabb
                     ReactHotModuleReplacement = true
                 });
             }
+         
             else
             {
                 app.UseExceptionHandler("/Home/Error");
