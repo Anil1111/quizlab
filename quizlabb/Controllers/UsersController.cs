@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using quizlabb.Models;
 using quizlabb.Models_;
 
+
 namespace quizlabb.Controllers
 {
     [Produces("application/json")]
@@ -19,6 +20,15 @@ namespace quizlabb.Controllers
         public UsersController(UserContext context)
         {
             _context = context;
+        }
+
+        [Route("api/GetQuestions")]
+        public string GetQuestions()
+        {
+
+            var questions = _context.AnswerOptions.Include(q => q.Question);
+
+            return "Recieved questions";
         }
 
     }
