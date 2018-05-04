@@ -9,5 +9,6 @@ namespace quizlabb.Models_
     {
         public int Id { get; set; }
         public string _Question { get; set; }
+        public string CorrectAnswer { get; set; }
     }
 }
