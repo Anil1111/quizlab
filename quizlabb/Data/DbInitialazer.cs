@@ -20,21 +20,21 @@ namespace quizlabb.Data
 
             var questions = new Question[]
             {
-               new Question { _Question = "Vilka länder konsumerar mest kaffe? Ordningen spelar ingen roll", CorrectAnswer= "Finland, Sverige, Norge"},
+               new Question { _Question = "Which country drinks most coffee? Order doesn't matter", CorrectAnswer= "Finland, Sweden, Norway"},
 
-               new Question {_Question = "Vilket är världens snabbaste däggdjur?", CorrectAnswer="Geopard"},
+               new Question {_Question = "Which mammal is the fastest?", CorrectAnswer="Geopard"},
 
-               new Question {_Question ="Disneys storfilm Lejonkungen handlar om lejonungen Simba i Afrika. Vad heter Simbas far?", CorrectAnswer="Mufasa"},
+               new Question {_Question ="Disneys movie The lion king about lion the cub Simba in Africa. What's Simbas fathers name?", CorrectAnswer="Mufasa"},
 
-               new Question {_Question = "Vad står LCHF för?", CorrectAnswer="Low Carb High Fat."},  
+               new Question {_Question = "What stands LCHF for?", CorrectAnswer="Low Carb High Fat."},  
 
-               new Question {_Question = "Marabou är en del av en koncern som är världens största chokladföretag. Vad heter koncernen?", CorrectAnswer="Mondelez International, tidigare Kraft foods"},
+               new Question {_Question = "Marabou is a part of a concern of the world biggest chocolate company. What's the company's name?", CorrectAnswer="Mondelez International, earlier Kraft foods"},
 
             };
 
             var answerOptions = new AnswerOption[]
             {
-                new AnswerOption { Question=questions[0], Option1=questions[0].CorrectAnswer, Option2 = "Sverige, Colombia, Norge" , Option3="Nederländerna, Island, Sverige"},
+                new AnswerOption { Question=questions[0], Option1=questions[0].CorrectAnswer, Option2 = "Sweden, Colombia, Norway" , Option3="Netherlands, Island, Sweden"},
 
                 new AnswerOption { Question=questions[1],Option1="Gnu", Option2 = "Antilop" , Option3=questions[1].CorrectAnswer},
 

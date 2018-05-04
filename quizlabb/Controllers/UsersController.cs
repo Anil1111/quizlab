@@ -20,16 +20,7 @@ namespace quizlabb.Controllers
         public UsersController(UserContext context)
         {
             _context = context;
-        }
-
-        [Route("api/GetQuestions")]
-        public string GetQuestions()
-        {
-
-            var questions = _context.AnswerOptions.Include(q => q.Question);
-
-            return "Recieved questions";
-        }
+        }   
 
     }
 }

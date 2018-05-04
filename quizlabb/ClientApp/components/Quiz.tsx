@@ -4,22 +4,42 @@ import { RouteComponentProps } from 'react-router';
 
 interface IQuizProps { }
 interface IQuizState {
-    totalPayed: number;
-    actualTax: number;
-    hasFetchedData: boolean;
-    amountToPay: number;
+    question1: string;
 }
 
 export class Quiz extends React.Component<IQuizProps,IQuizState> {
 
     public constructor(props: IQuizProps) {
-        super(props);
-
+        super(props); {
+            this.state = { question1: "" };
+        }
+        this.fetchQuestion = this.fetchQuestion.bind(this);
     }
-    render() {
-
-        return <div>Test</div>
+    public render() {
+        return <div>{this.state.question1}</div>;
     }
+    fetchQuestion() {
+        // fråga API:et efter aktuell data
+        fetch('/api/GetQuestions')
+            .then(data => {
+                console.log('Question returned ', data);
+                return data.json();
+            })
+            .then(obj => {
 
+                this.setState({
+                    question1: obj.option1
+                   
+                });
+                
+                console.log('GetQuestionInfo json ', obj);
+            })
+            .catch(message => {
+                console.log('något gick fel: ' + message);
+            })
+    }
+    componentDidMount() {
+        this.fetchQuestion();
+    }
 }
 
