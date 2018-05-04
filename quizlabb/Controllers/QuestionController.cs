@@ -21,17 +21,12 @@ namespace quizlabb.Controllers
             _context = context;
         }
         [Route("api/GetQuestions")]
-        public AnswerViewModel GetQuestions()
+        public IEnumerable<AnswerOption> GetQuestions()
         {
 
-            var question = _context.AnswerOptions.Last();
+            var questions = _context.AnswerOptions.Include(q => q.Question);
 
-            AnswerViewModel viewModel = new AnswerViewModel()
-            {
-                Option1 = question.Option1
-            };
-
-            return viewModel;
+            return questions;
         }
     }
 }

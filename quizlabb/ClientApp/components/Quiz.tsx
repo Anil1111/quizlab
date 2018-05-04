@@ -4,35 +4,41 @@ import { RouteComponentProps } from 'react-router';
 
 interface IQuizProps { }
 interface IQuizState {
-    question1: string;
+    questions: Quest[];
 }
 
-export class Quiz extends React.Component<IQuizProps,IQuizState> {
+export class Quiz extends React.Component<IQuizProps, IQuizState> {
+
+
+   
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { question1: "" };
+            this.state = { questions: [] };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
     }
     public render() {
-        return <div>{this.state.question1}</div>;
+
+        let oldList = this.state.questions;
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.option1}</li>);
+        return <ul>{list}</ul>;
+            
     }
     fetchQuestion() {
         // fråga API:et efter aktuell data
+
+       
         fetch('/api/GetQuestions')
             .then(data => {
                 console.log('Question returned ', data);
                 return data.json();
             })
             .then(obj => {
-
+           
                 this.setState({
-                    question1: obj.option1
-                   
-                });
-                
-                console.log('GetQuestionInfo json ', obj);
+                   questions: obj                
+                });            
             })
             .catch(message => {
                 console.log('något gick fel: ' + message);
@@ -41,5 +47,12 @@ export class Quiz extends React.Component<IQuizProps,IQuizState> {
     componentDidMount() {
         this.fetchQuestion();
     }
+}
+
+interface Quest {
+    question: string;
+    option1: string;
+    option2: string;
+    option3: string;
 }
 
