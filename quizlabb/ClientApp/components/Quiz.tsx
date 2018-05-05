@@ -21,8 +21,9 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
     public render() {
 
         let oldList = this.state.questions;
-        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}</li>);
-        return <ul>{list}</ul>;
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" />{x.option1}<br /><input type="radio" />{x.option2}<br /><input type="radio" />{x.option3}</li>);
+   
+        return <ol>{list}</ol>;
             
     }
     fetchQuestion() {
