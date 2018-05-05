@@ -27,7 +27,10 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
 
 
-        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" onClick={(e)=>this.handleChange(x.option1,index)} value={x.option1} name={index.toString()} /> {x.option1} < br /> <input type="radio" onClick={(e)=>this.handleChange(x.option2,index)} value={x.option2} name={index.toString()} />{x.option2}<br /><input type="radio" onClick={(e) =>this.handleChange(x.option3,index)} value={x.option3} name={index.toString()} />{x.option3}</li>);
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br />
+            <input type="radio" onChange={this.handleChange} value={x.option1} name={index.toString()} /> {x.option1} < br />
+            <input type="radio" onChange={this.handleChange} value={x.option2} name={index.toString()} />{x.option2}<br />
+            <input type="radio" onChange={this.handleChange} value={x.option3} name={index.toString()} />{x.option3}</li>);
 
 
 
@@ -40,10 +43,21 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     }
 
-    handleChange(option: string, index: number) {
-        this.setState({ selectedOption: option })
+    handleChange(event:any) {
+        this.setState({ selectedOption: event.target.value })
 
-        console.log(index+' '+option);
+        let selected = event.target.value;
+
+        let correctAnswers = this.state.questions.filter(x => x.correctAnswer == selected);
+
+        if (correctAnswers.length > 0) {
+            console.log('1 poäng!');
+        } else {
+            console.log('0 poäng');
+        }
+       
+        correctAnswers = [];
+        console.log(event.target.value)
       
     }
 
