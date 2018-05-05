@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router';
 interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
+    selectedOption: string;
 }
 
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
@@ -14,9 +15,11 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [] };
+            this.state = { questions: [] , selectedOption: ""};
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     public render() {
 
@@ -24,21 +27,31 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
 
 
-        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" name={index.toString()} /> {x.option1} < br /> <input type="radio" name={index.toString()} />{x.option2}<br /><input type="radio" name={index.toString()} />{x.option3}</li>);
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" onClick={(e)=>this.handleChange(x.option1,index)} value={x.option1} name={index.toString()} /> {x.option1} < br /> <input type="radio" onClick={(e)=>this.handleChange(x.option2,index)} value={x.option2} name={index.toString()} />{x.option2}<br /><input type="radio" onClick={(e) =>this.handleChange(x.option3,index)} value={x.option3} name={index.toString()} />{x.option3}</li>);
 
 
 
         return (
             <div>
                 <ol>{list}</ol><br />
-                <input type="submit" value="Submit" onClick={ this.handleClick }  />
+                <input type="submit" value="Submit" onClick={this.handleSubmit} />
             </div>
         );
 
     }
 
-    handleClick(event: any) {
- 
+    handleChange(option: string, index: number) {
+        this.setState({ selectedOption: option })
+
+        console.log(index+' '+option);
+      
+    }
+
+    handleSubmit(event: any) {
+
+      
+
+        console.log('bajs');
     }
 
 
