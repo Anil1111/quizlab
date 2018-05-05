@@ -6,6 +6,7 @@ interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
     selectedOption: string;
+    isButtonDisable: boolean;
 }
 
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
@@ -15,7 +16,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [] , selectedOption: ""};
+            this.state = { questions: [], selectedOption: "", isButtonDisable: false };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,9 +29,9 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
 
         let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br />
-            <input type="radio" onChange={this.handleChange} value={x.option1} name={index.toString()} /> {x.option1} < br />
-            <input type="radio" onChange={this.handleChange} value={x.option2} name={index.toString()} />{x.option2}<br />
-            <input type="radio" onChange={this.handleChange} value={x.option3} name={index.toString()} />{x.option3}</li>);
+            <input type="radio" disabled={this.state.isButtonDisable} onChange={this.handleChange} value={x.option1} name={index.toString()} /> {x.option1} < br />
+            <input type="radio" disabled={this.state.isButtonDisable} onChange={this.handleChange} value={x.option2} name={index.toString()} />{x.option2}<br />
+            <input type="radio" disabled={this.state.isButtonDisable} onChange={this.handleChange} value={x.option3} name={index.toString()} />{x.option3}</li>);
 
 
 
@@ -45,6 +46,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     handleChange(event:any) {
         this.setState({ selectedOption: event.target.value })
+        this.setState({ isButtonDisable: true })
 
         let selected = event.target.value;
 
