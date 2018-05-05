@@ -10,7 +10,7 @@ interface IQuizState {
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
 
-   
+
 
     public constructor(props: IQuizProps) {
         super(props); {
@@ -22,29 +22,41 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         let oldList = this.state.questions;
 
-        
 
-        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" name={x.question} /> {x.option1} < br /> <input type="radio" name={x.question} />{x.option2}<br /><input type="radio" name={x.question} />{x.option3}</li>);
 
-        
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}<br /><input type="radio" name={index.toString()} /> {x.option1} < br /> <input type="radio" name={index.toString()} />{x.option2}<br /><input type="radio" name={index.toString()} />{x.option3}</li>);
 
-        return <ol>{list}</ol>;
-            
+
+
+        return (
+            <div>
+                <ol>{list}</ol><br />
+                <input type="submit" value="Submit" onClick={ this.handleClick }  />
+            </div>
+        );
+
     }
+
+    handleClick(event: any) {
+ 
+    }
+
+
+
     fetchQuestion() {
         // fråga API:et efter aktuell data
 
-       
+
         fetch('/api/GetQuestions')
             .then(data => {
                 console.log('Question returned ', data);
                 return data.json();
             })
             .then(obj => {
-           
+
                 this.setState({
-                   questions: obj                
-                });            
+                    questions: obj
+                });
             })
             .catch(message => {
                 console.log('något gick fel: ' + message);
