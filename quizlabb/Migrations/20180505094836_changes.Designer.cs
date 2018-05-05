@@ -11,9 +11,10 @@ using System;
 namespace quizlabb.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20180505094836_changes")]
+    partial class changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,6 +210,20 @@ namespace quizlabb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HighScores");
+                });
+
+            modelBuilder.Entity("quizlabb.Models_.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CorrectAnswer");
+
+                    b.Property<string>("_Question");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

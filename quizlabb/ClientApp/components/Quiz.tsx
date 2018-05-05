@@ -21,7 +21,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
     public render() {
 
         let oldList = this.state.questions;
-        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.option1}</li>);
+        let list = oldList.map((x, index) => <li key={x + ':' + index}>{x.question}</li>);
         return <ul>{list}</ul>;
             
     }
@@ -51,6 +51,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
 interface Quest {
     question: string;
+    correctAnswer: string;
     option1: string;
     option2: string;
     option3: string;

@@ -24,7 +24,7 @@ namespace quizlabb.Controllers
         public IEnumerable<AnswerOption> GetQuestions()
         {
 
-            var questions = _context.AnswerOptions.Include(q => q.Question);
+            var questions = _context.AnswerOptions;
 
             return questions;
         }
