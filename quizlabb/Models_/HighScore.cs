@@ -9,5 +9,6 @@ namespace quizlabb.Models_
     {
         public int Id { get; set; }
         public int _HighScore { get; set; }
+        public User User { get; set; }
     }
 }

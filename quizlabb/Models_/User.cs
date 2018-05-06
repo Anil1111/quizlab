@@ -8,6 +8,6 @@ namespace quizlabb.Models_
 {
     public class User : IdentityUser
     {
-        public HighScore HighScore { get; set; }
+        public List<HighScore> HighScores { get; set; }
     }
 }

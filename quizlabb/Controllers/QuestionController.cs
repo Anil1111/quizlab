@@ -28,5 +28,17 @@ namespace quizlabb.Controllers
 
             return questions;
         }
+
+        [Route("api/ReceiveScore")]
+        public string ReceiveScore(string userEmail,HighScore userScore)
+        {
+           var user = _context._Users.Where(v => v.Email==userEmail).FirstOrDefault();
+
+            user.HighScores.Add(userScore);
+
+            _context._Users.Add(user);
+
+            return "Recieved score";
+        }
     }
 }
