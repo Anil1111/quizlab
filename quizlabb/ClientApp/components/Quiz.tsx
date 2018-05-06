@@ -34,14 +34,24 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         let counter = this.state.counter;
 
-        return (<ol>
-            {question[counter]}
-            <br />
-            <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> {option1[counter]} < br />
-            <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]}/>{option2[counter]}<br />
-            <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]}/>{option3[counter]}<br />
-            <button value="submit" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
-        </ol>);
+        
+        if (this.state.questions.length != counter) {
+
+            return (
+                <ol>
+                    {question[counter]}
+                    <br />
+                    <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> {option1[counter]} < br />
+                    <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]} />{option2[counter]}<br />
+                    <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]} />{option3[counter]}<br />
+                    <button value="submit" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
+                </ol>);
+        }
+
+        else {
+
+            return <div>{this.state.counter}</div>
+        }
 
     }
 
@@ -60,7 +70,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         this.setState({ counter: count })
 
-    
+
         let finalSelectedOption = this.state.selectedOption;
 
 
