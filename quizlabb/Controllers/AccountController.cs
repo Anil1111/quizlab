@@ -131,7 +131,7 @@ namespace quizlabb.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return Redirect("~/quiz");
             }
         }
 
