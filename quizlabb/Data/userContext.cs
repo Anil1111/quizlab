@@ -17,6 +17,7 @@ namespace quizlabb.Models
 
         public DbSet<HighScore> HighScores { get; set; }
         public DbSet<AnswerOption> AnswerOptions { get; set; }
+        public DbSet<User> _Users { get; set; }
 
     }
 }
