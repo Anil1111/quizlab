@@ -12,7 +12,7 @@ using quizlabb.Models_.ViewModels;
 namespace quizlabb.Controllers
 {
 
-    public class UsersController : Controller
+    public class AccountController : Controller
     {
         private readonly UserContext _context;
         private readonly UserManager<User> _userManager;
@@ -21,11 +21,11 @@ namespace quizlabb.Controllers
         private readonly ILogger _logger;
 
 
-        public UsersController(UserContext context,
+        public AccountController(UserContext context,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager,
-            ILogger<UsersController> logger)
+            ILogger<AccountController> logger)
         {
             _context = context;
             _userManager = userManager;
@@ -33,6 +33,10 @@ namespace quizlabb.Controllers
             _roleManager = roleManager;
             _logger = logger;
 
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
