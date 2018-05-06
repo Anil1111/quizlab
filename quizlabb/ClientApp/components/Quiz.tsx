@@ -2,12 +2,14 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 
+
 interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
     selectedOption: string;
     isButtonDisable: boolean;
     counter: number;
+    score: number;
 }
 
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
@@ -17,11 +19,12 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0 };
+            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0, score:50 };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.submitScore = this.submitScore.bind(this);
     }
     public render() {
 
@@ -68,46 +71,57 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         let count = this.state.counter + 1;
 
-        this.setState({ counter: count })
+        if (count <= this.state.questions.length) {
+
+            this.setState({ counter: count })
 
 
-        let finalSelectedOption = this.state.selectedOption;
+            let finalSelectedOption = this.state.selectedOption;
 
 
-        let correctAnswers = this.state.questions.filter(x => x.correctAnswer == finalSelectedOption);
+            let correctAnswers = this.state.questions.filter(x => x.correctAnswer == finalSelectedOption);
 
-        if (correctAnswers.length > 0) {
-            console.log('1 poäng!');
-        } else {
-            console.log('0 poäng');
+            if (correctAnswers.length > 0) {
+                console.log('1 poäng!');
+            } else {
+                console.log('0 poäng');
+            }
+
+            console.log(finalSelectedOption);
+            console.log(this.state.counter);
         }
 
-        console.log(finalSelectedOption);
-        console.log(this.state.counter);
+        this.submitScore();
+    
     }
+        submitScore() {
+            fetch('/Question/ReceiveScore?score=' + this.state.score)
+                .then(Response =>
+                    console.log('fetch status: ', Response.status));
+        }
 
-    fetchQuestion() {
-        // fråga API:et efter aktuell data
+fetchQuestion() {
+    // fråga API:et efter aktuell data
 
 
-        fetch('/api/GetQuestions')
-            .then(data => {
-                console.log('Question returned ', data);
-                return data.json();
-            })
-            .then(obj => {
+    fetch('/api/GetQuestions')
+        .then(data => {
+            console.log('Question returned ', data);
+            return data.json();
+        })
+        .then(obj => {
 
-                this.setState({
-                    questions: obj
-                });
-            })
-            .catch(message => {
-                console.log('något gick fel: ' + message);
-            })
-    }
-    componentDidMount() {
-        this.fetchQuestion();
-    }
+            this.setState({
+                questions: obj
+            });
+        })
+        .catch(message => {
+            console.log('något gick fel: ' + message);
+        })
+}
+componentDidMount() {
+    this.fetchQuestion();
+}
 }
 
 interface Quest {
