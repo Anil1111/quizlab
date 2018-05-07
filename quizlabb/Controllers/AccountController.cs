@@ -131,7 +131,7 @@ namespace quizlabb.Controllers
             }
             else
             {
-                return Redirect("~/quiz");
+                return RedirectToAction(nameof(QuestionController.GetLoggedInUser), "Question");
             }
         }
 

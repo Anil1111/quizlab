@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quizlabb.Models;
@@ -15,10 +16,13 @@ namespace quizlabb.Controllers
     public class QuestionController : Controller
     {
         private readonly UserContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public QuestionController(UserContext context)
+
+        public QuestionController(UserContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         [Route("api/GetQuestions")]
         public IEnumerable<AnswerOption> GetQuestions()
@@ -29,10 +33,28 @@ namespace quizlabb.Controllers
             return questions;
         }
 
-      
+        public async Task<IActionResult> GetLoggedInUser()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var model = new User();
+
+            if (user == null)
+            {
+                model.Id = "";
+            }
+            else
+            {
+                model.Id = user.Id;
+            }
+
+
+            return Redirect("~/quiz");
+        }
+
+
         public string ReceiveScore(int score)
         {
-            //var user = _context._Users.Where(v => v.Email==userEmail).FirstOrDefault();
+            
 
             // user.HighScores.Add(userScore);
 
@@ -48,5 +70,8 @@ namespace quizlabb.Controllers
 
             return score.ToString(); 
         }
+
+
+        
     }
 }
