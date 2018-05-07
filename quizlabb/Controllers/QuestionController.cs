@@ -52,26 +52,31 @@ namespace quizlabb.Controllers
         }
 
 
-        public string ReceiveScore(int score)
+        public string ReceiveScore(int score, string id)
         {
-            
+            var user = _context._Users.Where(x => x.Id == id).FirstOrDefault();
 
             // user.HighScores.Add(userScore);
 
             // _context._Users.Add(user);
 
-            HighScore score1 = new HighScore();
+            HighScore score1 = new HighScore()
+            {
+                _HighScore = score,
 
-            score1._HighScore = score;
+                User = user
+            };
+
+
 
 
             _context.HighScores.Add(score1);
             _context.SaveChanges();
 
-            return score.ToString(); 
+            return score.ToString();
         }
 
 
-        
+
     }
 }

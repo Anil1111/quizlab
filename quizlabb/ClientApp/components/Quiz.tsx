@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 
-
+let id = document.getElementById('react-app')!.textContent;
 interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
@@ -62,6 +62,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
     handleChange(event: any) {
         this.setState({ selectedOption: event.target.value })
         this.setState({ isButtonDisable: false })
+        console.log(id);
 
 
 
@@ -95,7 +96,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
     
     }
         submitScore() {
-            fetch('/Question/ReceiveScore?score=' + this.state.score)
+            fetch('/Question/ReceiveScore?score=' + this.state.score +'&id=' + id)
                 .then(Response =>
                     console.log('fetch status: ', Response.status));
         }
