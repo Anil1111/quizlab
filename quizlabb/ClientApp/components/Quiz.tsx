@@ -95,8 +95,8 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
         this.submitScore();
     
     }
-        submitScore() {
-            fetch('/Question/ReceiveScore?score=' + this.state.score +'&id=' + id)
+    submitScore() {
+        fetch('/Question/ReceiveScore?score=' + this.state.score)
                 .then(Response =>
                     console.log('fetch status: ', Response.status));
         }

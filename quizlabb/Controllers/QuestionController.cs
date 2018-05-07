@@ -52,13 +52,17 @@ namespace quizlabb.Controllers
         }
 
 
+
         public string ReceiveScore(int score, string id)
         {
-            var user = _context._Users.Where(x => x.Id == id).FirstOrDefault();
+            var user = _context.User.Where(x => x.Id == id).FirstOrDefault();
 
-            // user.HighScores.Add(userScore);
 
-            // _context._Users.Add(user);
+
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{id}'.");
+            }
 
             HighScore score1 = new HighScore()
             {
