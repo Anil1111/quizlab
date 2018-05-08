@@ -35,9 +35,9 @@ namespace quizlabb.Controllers
         public IEnumerable<HighScore> GetHighScores()
         {
 
-            var HighScores = _context.HighScores.Select(x => x.User.HighScores);
+            var result = _context.HighScores;
 
-           var result = HighScores.Max();
+         
 
 
             return result;

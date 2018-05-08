@@ -22,7 +22,7 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
 
         let oldList = this.state.highScores;
         let list = oldList.map((x, index) =>
-            <li key={x + ':' + index}>{x._highScore}</li>);
+            <li key={x + ':' + index}>{x._HighScore}</li>);
         // elementet 1 blir <li>1</li> osv.
         return <ul>{list}</ul>;
 
@@ -53,5 +53,5 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
 }
 
 interface HighScore {
-    _highScore: number;
+    _HighScore: number;
 }
