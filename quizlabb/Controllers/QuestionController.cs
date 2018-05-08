@@ -32,6 +32,17 @@ namespace quizlabb.Controllers
 
             return questions;
         }
+        public IEnumerable<HighScore> GetHighScores()
+        {
+
+            var HighScores = _context.HighScores.Select(x => x.User.HighScores);
+
+           var result = HighScores.Max();
+
+
+            return result;
+        }
+
 
         public async Task<IActionResult> GetLoggedInUser()
         {

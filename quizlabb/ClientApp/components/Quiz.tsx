@@ -19,7 +19,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0, score:50 };
+            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0, score:0 };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
