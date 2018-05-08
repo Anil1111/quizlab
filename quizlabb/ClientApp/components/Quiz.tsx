@@ -54,6 +54,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
         else {
 
             return <div>{this.state.counter}</div>
+         
         }
 
     }
@@ -84,15 +85,22 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
             if (correctAnswers.length > 0) {
                 console.log('1 poäng!');
+
+                let add = this.state.score + 1;
+
+                this.setState ({score: add})
             } else {
                 console.log('0 poäng');
             }
 
             console.log(finalSelectedOption);
             console.log(this.state.counter);
+
+            if (this.state.questions.length == count)
+            this.submitScore();
         }
 
-        this.submitScore();
+     
     
     }
     submitScore() {
