@@ -80,7 +80,9 @@ namespace quizlabb.Controllers
             {
                 _HighScore = score,
 
-                User = user
+                User = user,
+                UserId = id
+                
             };
 
 
