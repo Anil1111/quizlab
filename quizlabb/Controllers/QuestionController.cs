@@ -37,10 +37,11 @@ namespace quizlabb.Controllers
 
             var result = _context.HighScores;
 
-         
-
-
-            return result;
+            var topScoreByPlayer = _context.HighScores.GroupBy(x => x.UserId)
+                 .Select(x => x.OrderByDescending(y => y._HighScore).First())
+                 .OrderByDescending(x => x._HighScore);
+                
+            return topScoreByPlayer;
         }
 
 
