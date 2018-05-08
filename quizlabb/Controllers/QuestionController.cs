@@ -75,14 +75,15 @@ namespace quizlabb.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{id}'.");
             }
-
+           
             HighScore score1 = new HighScore()
             {
                 _HighScore = score,
 
                 User = user,
-                UserId = id
-                
+                UserId = id,
+                UserName = _context.Users.Where(u => u.Id == id).Single().UserName
+
             };
 
 

@@ -13,6 +13,7 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
     public constructor() {
         super(); {
             this.state = { highScores: [] };
+            
         }
 
         this.fetchScores = this.fetchScores.bind(this);
@@ -22,9 +23,9 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
 
         let oldList = this.state.highScores;
         let list = oldList.map((x, index) =>
-            <li key={x + ':' + index}>{x._HighScore}</li>);
+            <li key={x + ':' + index}>{x._HighScore+' points. User:'+x.userName}</li>);
         // elementet 1 blir <li>1</li> osv.
-        return <ul>{list}</ul>;
+        return <ol>{list}</ol>;
 
     }
 
@@ -54,4 +55,5 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
 
 interface HighScore {
     _HighScore: number;
+    userName: string;
 }
