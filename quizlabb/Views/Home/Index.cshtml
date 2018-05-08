@@ -1,14 +1,13 @@
 @using Microsoft.AspNetCore.Identity
 @using quizlabb.Models_;
-@model User
+
 
 
 @inject UserManager<User> UserManager
 
 
 <div id="react-app">
-
-    @UserManager.GetUserAsync(User).Result.Id
+@ViewData["id"]
 
 </div>
 @section scripts {

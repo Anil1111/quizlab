@@ -55,6 +55,7 @@ namespace quizlabb.Controllers
 
         public string ReceiveScore(int score, string id)
         {
+            id = id.Trim();
             var user = _context.User.Where(x => x.Id == id).FirstOrDefault();
 
 
