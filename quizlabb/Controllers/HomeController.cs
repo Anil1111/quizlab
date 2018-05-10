@@ -18,8 +18,8 @@ namespace quizlabb.Controllers
         }
         public IActionResult Index()
         {
-            string id = userManager.GetUserId(HttpContext.User);
-            ViewData["id"] = id;
+            string name = userManager.GetUserName(HttpContext.User);
+            ViewData["name"] = name;
             return View();
         }
 

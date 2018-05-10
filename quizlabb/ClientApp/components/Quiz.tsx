@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 
-let id = document.getElementById('react-app')!.textContent;
+let name = document.getElementById('react-app')!.textContent;
 interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
@@ -10,6 +10,7 @@ interface IQuizState {
     isButtonDisable: boolean;
     counter: number;
     score: number;
+    startQuiz: boolean;
 }
 
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
@@ -19,14 +20,22 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [], selectedOption: "", isButtonDisable: true, counter: 0, score: 0 };
+            this.state = { questions: [], selectedOption: "", isButtonDisable: true, counter: 0, score: 0, startQuiz: false };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.submitScore = this.submitScore.bind(this);
+        this.startQuiz = this.startQuiz.bind(this);
     }
     public render() {
+
+
+
+
+
+
+
 
         let oldList = this.state.questions;
 
@@ -37,51 +46,64 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         let counter = this.state.counter;
 
-
-
-        if (this.state.questions.length == counter && counter != 0) {
-
-            this.submitScore();
-            console.log(this.state.score)
-            return <div>{this.state.counter}</div>
-
+        if (this.state.startQuiz == false) {
+            return <div id="startPageWrapper">
+                <h1>Welcome {name}, are you ready to play the quiz?</h1>
+                <button id="startQuizButton" className="submitBtn" onClick={this.startQuiz}>Start</button>
+            </div>
         }
+
         else {
 
+            if (this.state.questions.length == counter) {
 
-            return (
-                <ol>
-                    <h2>{question[counter]}</h2>
-                    <br />
-                    <label className="container">{option1[counter]}
-                        <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> < br />
-                        <span className="checkmark"></span>
-                    </label>
-                    <label className="container">{option2[counter]}
-                        <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]} /><br />
-                        <span className="checkmark"></span>
-                    </label>
-                    <label className="container">{option3[counter]}
-                        <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]} /><br />
-                        <span className="checkmark"></span>
-                    </label>
-                    <br />
-                    <button value="submit" className="submitBtn" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
-                </ol>);
+                this.submitScore();
+                console.log(this.state.score)
+                return <div>{this.state.counter}</div>
+
+            }
+            else {
+
+
+                return (
+                    <ol>
+                        <h2>{question[counter]}</h2>
+                        <br />
+                        <label className="container">{option1[counter]}
+                            <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> < br />
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">{option2[counter]}
+                            <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]} /><br />
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">{option3[counter]}
+                            <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]} /><br />
+                            <span className="checkmark"></span>
+                        </label>
+                        <br />
+                        <button value="submit" className="submitBtn" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
+                    </ol>);
+            }
         }
+
+    }
+
+    startQuiz(event: any) {
+        this.setState({ startQuiz: true })
     }
 
     handleChange(event: any) {
         this.setState({ selectedOption: event.target.value })
         this.setState({ isButtonDisable: false })
-        console.log(id);
-
+       
 
 
     }
 
     handleSubmit(event: any) {
 
+       
         let count = this.state.counter + 1;
 
         if (count <= this.state.questions.length) {
@@ -114,8 +136,8 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     }
     submitScore() {
-        console.log('/Question/ReceiveScore?score=' + this.state.score + '&id=' + id);
-        fetch('/Question/ReceiveScore?score=' + this.state.score + '&id=' + id)
+        console.log('/Question/ReceiveScore?score=' + this.state.score + '&name=' + name);
+        fetch('/Question/ReceiveScore?score=' + this.state.score + '&name=' + name)
             .then(Response =>
                 console.log('fetch status: ', Response.status));
     }
