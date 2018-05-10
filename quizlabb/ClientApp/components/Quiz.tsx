@@ -19,7 +19,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0, score:0 };
+            this.state = { questions: [], selectedOption: "", isButtonDisable: false, counter: 0, score: 0 };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,7 +37,8 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         let counter = this.state.counter;
 
-        
+
+
         if (this.state.questions.length == counter && counter != 0) {
 
             this.submitScore();
@@ -47,21 +48,28 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
         }
         else {
 
+
             return (
                 <ol>
-                    {question[counter]}
+                    <h2>{question[counter]}</h2>
                     <br />
-                    <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> {option1[counter]} < br />
-                    <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]} />{option2[counter]}<br />
-                    <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]} />{option3[counter]}<br />
-                    <button value="submit" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
+                    <label className="container">{option1[counter]}
+                        <input type="radio" name="q1" value={option1[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option1[counter]} /> < br />
+                        <span className="checkmark"></span>
+                    </label>
+                    <label className="container">{option2[counter]}
+                        <input type="radio" name="q1" value={option2[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option2[counter]} /><br />
+                        <span className="checkmark"></span>
+                    </label>
+                    <label className="container">{option3[counter]}
+                        <input type="radio" name="q1" value={option3[counter]} onChange={this.handleChange} checked={this.state.selectedOption === option3[counter]} /><br />
+                        <span className="checkmark"></span>
+                    </label>
+                    <br />
+                    <button value="submit" className="submitBtn" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
                 </ol>);
         }
-
-       
-
     }
-
 
     handleChange(event: any) {
         this.setState({ selectedOption: event.target.value })
@@ -91,49 +99,47 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
                 let add = this.state.score + 1;
 
-                this.setState ({score: add})
+                this.setState({ score: add })
             } else {
                 console.log('0 poäng');
             }
 
             console.log(finalSelectedOption);
             console.log(this.state.counter);
-
-           
         }
 
-     
-    
+
+
     }
     submitScore() {
         console.log('/Question/ReceiveScore?score=' + this.state.score + '&id=' + id);
-        fetch('/Question/ReceiveScore?score=' + this.state.score+'&id='+id)
-                .then(Response =>
-                    console.log('fetch status: ', Response.status));
-        }
+        fetch('/Question/ReceiveScore?score=' + this.state.score + '&id=' + id)
+            .then(Response =>
+                console.log('fetch status: ', Response.status));
+    }
 
-fetchQuestion() {
-    // fråga API:et efter aktuell data
+    fetchQuestion() {
+        // fråga API:et efter aktuell data
 
 
-    fetch('/api/GetQuestions')
-        .then(data => {
-            console.log('Question returned ', data);
-            return data.json();
-        })
-        .then(obj => {
+        fetch('/api/GetQuestions')
+            .then(data => {
+                console.log('Question returned ', data);
+                return data.json();
+            })
+            .then(obj => {
 
-            this.setState({
-                questions: obj
-            });
-        })
-        .catch(message => {
-            console.log('något gick fel: ' + message);
-        })
-}
-componentDidMount() {
-    this.fetchQuestion();
-}
+                this.setState({
+                    questions: obj
+                });
+            })
+            .catch(message => {
+                console.log('något gick fel: ' + message);
+            })
+    }
+    componentDidMount() {
+        this.fetchQuestion();
+    }
 }
 
 interface Quest {
