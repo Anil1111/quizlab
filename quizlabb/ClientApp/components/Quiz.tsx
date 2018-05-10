@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 
+
 let name = document.getElementById('react-app')!.textContent;
 interface IQuizProps { }
 interface IQuizState {
@@ -27,27 +28,13 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
         this.handleChange = this.handleChange.bind(this);
         this.submitScore = this.submitScore.bind(this);
         this.startQuiz = this.startQuiz.bind(this);
+        this.restartQuiz = this.restartQuiz.bind(this);
     }
     public render() {
 
 
-
-
-
-
-
-
-        let oldList = this.state.questions;
-
-        let question = oldList.map(x => x.question);
-        let option1 = oldList.map(o => o.option1);
-        let option2 = oldList.map(o => o.option2);
-        let option3 = oldList.map(o => o.option3);
-
-        let counter = this.state.counter;
-
         if (this.state.startQuiz == false) {
-            return <div id="startPageWrapper">
+            return <div className="text-center">
                 <h1>Welcome {name}, are you ready to play the quiz?</h1>
                 <button id="startQuizButton" className="submitBtn" onClick={this.startQuiz}>Start</button>
             </div>
@@ -55,11 +42,20 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         else {
 
+            let oldList = this.state.questions;
+
+            let question = oldList.map(x => x.question);
+            let option1 = oldList.map(o => o.option1);
+            let option2 = oldList.map(o => o.option2);
+            let option3 = oldList.map(o => o.option3);
+
+            let counter = this.state.counter;
+
             if (this.state.questions.length == counter) {
 
+                let maximumScore = this.state.questions.length;
                 this.submitScore();
-                console.log(this.state.score)
-                return <div>{this.state.counter}</div>
+                return < div className="text-center"><h1>You got {this.state.score} of {this.state.questions.length} points. Do you want to play again?</h1><button id="startQuizButton" className="submitBtn" onClick={this.restartQuiz}>Start</button></div>
 
             }
             else {
@@ -91,6 +87,15 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     startQuiz(event: any) {
         this.setState({ startQuiz: true })
+        console.log(this.state.startQuiz)
+    }
+
+    restartQuiz() {
+        this.setState({ startQuiz: true })
+        this.setState({ counter: 0 })
+        this.setState({score: 0})
+        console.log(this.state.startQuiz)
+        
     }
 
     handleChange(event: any) {

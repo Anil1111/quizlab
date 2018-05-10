@@ -23,6 +23,7 @@
 }
 /* The container */
 .container {
+    margin: 0 auto;
     display: block;
     position: relative;
     padding-left: 35px;
@@ -100,6 +101,18 @@
     background-color: RoyalBlue;
 }
 
+
+.submitBtn:disabled {
+    background-color: RoyalBlue;
+    opacity: 0.3
+}
+
+.text-center {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {
@@ -114,8 +127,8 @@
         width: calc(25% - 20px);
     }
     .main-nav .navbar {
-        border-radius: 0px;
-        border-width: 0px;
+        border-radius: 0;
+        border-width: 0;
         height: 100%;
     }
     .main-nav .navbar-header {
@@ -123,7 +136,7 @@
     }
     .main-nav .navbar-collapse {
         border-top: 1px solid #444;
-        padding: 0px;
+        padding: 0;
     }
     .main-nav .navbar ul {
         float: none;

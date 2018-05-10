@@ -66,23 +66,6 @@ namespace quizlabb.Controllers
         }
 
 
-        public async Task<IActionResult> GetLoggedInUser()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var model = new User();
-
-            if (user == null)
-            {
-                model.Id = "";
-            }
-            else
-            {
-                model.Id = user.Id;
-            }
-
-
-            return Redirect("~/quiz");
-        }
 
 
 

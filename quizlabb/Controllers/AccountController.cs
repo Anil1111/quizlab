@@ -64,7 +64,7 @@ namespace quizlabb.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return Redirect("~/quiz");
                 }
                 else
                 {
@@ -105,7 +105,7 @@ namespace quizlabb.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return Redirect("~/quiz");
                 }
                 AddErrors(result);
             }
@@ -123,17 +123,6 @@ namespace quizlabb.Controllers
         }
 
 
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(QuestionController.GetLoggedInUser), "Question");
-            }
-        }
 
 
         [HttpPost]
