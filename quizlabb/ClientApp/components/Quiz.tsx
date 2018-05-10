@@ -38,7 +38,14 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
         let counter = this.state.counter;
 
         
-        if (this.state.questions.length != counter) {
+        if (this.state.questions.length == counter && counter != 0) {
+
+            this.submitScore();
+            console.log(this.state.score)
+            return <div>{this.state.counter}</div>
+
+        }
+        else {
 
             return (
                 <ol>
@@ -51,11 +58,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
                 </ol>);
         }
 
-        else {
-
-            return <div>{this.state.counter}</div>
-         
-        }
+       
 
     }
 
@@ -96,8 +99,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
             console.log(finalSelectedOption);
             console.log(this.state.counter);
 
-            if (this.state.questions.length == count)
-            this.submitScore();
+           
         }
 
      
