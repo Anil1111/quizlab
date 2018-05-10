@@ -32,6 +32,27 @@ namespace quizlabb.Controllers
 
             return questions;
         }
+
+
+        public JsonResult AddQuestion(AnswerOption newQuestion)
+        {
+            AnswerOption question = new AnswerOption()
+            {
+                Question = newQuestion.Question,
+                Option1 = newQuestion.Option1,
+                Option2 = newQuestion.Option2,
+                Option3 = newQuestion.Option3,
+                CorrectAnswer = newQuestion.CorrectAnswer
+
+            };
+
+            _context.AnswerOptions.Add(question);
+            _context.SaveChanges();
+
+            return Json(newQuestion);
+        }
+
+
         public IEnumerable<HighScore> GetHighScores()
         {
 
