@@ -13,19 +13,18 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className='icon-bar'></span>
                     </button>
                     <Link className='navbar-brand' to={'/'}>quizlabb</Link>
-                    <div>hej</div>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
                         <li>
-                            <NavLink to={ '/' } exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span> Home
+                            <NavLink to={ '/quiz' } exact activeClassName='active'>
+                                <span className='glyphicon glyphicon-circle-arrow-right'></span> Quiz
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={ '/counter' } activeClassName='active'>
-                                <span className='glyphicon glyphicon-education'></span> Counter
+                            <NavLink to={ '/addquestion' } activeClassName='active'>
+                                <span className='glyphicon glyphicon-plus-sign'></span> New question
                             </NavLink>
                         </li>
                         <li>
