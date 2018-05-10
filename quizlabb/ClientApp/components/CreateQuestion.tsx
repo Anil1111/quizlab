@@ -45,11 +45,16 @@ export class CreateQuestion extends React.Component<RouteComponentProps<{}>> {
     handleSubmit(event: any) {
 
         event.preventDefault();
+       
         const data = new FormData(event.target);
 
         fetch('/Question/AddQuestion', {
             method: 'POST',
             body: data,
         });
+
+        event.target.reset();
+
+       
     }
 }
