@@ -60,7 +60,7 @@ namespace quizlabb.Controllers
 
             var topScoreByPlayer = _context.HighScores.GroupBy(x => x.UserId)
                  .Select(x => x.OrderByDescending(y => y._HighScore).First())
-                 .OrderByDescending(x => x._HighScore);
+                 .OrderByDescending(x => x._HighScore).ThenByDescending(d => d.DateTime);
                 
             return topScoreByPlayer;
         }
@@ -88,7 +88,7 @@ namespace quizlabb.Controllers
                 User = user,
                 UserId = _context.Users.Where(u => u.Email == name).Single().Id,
                 UserName = name,
-                DateTime = DateTime.Now.ToShortDateString()
+                DateTime = DateTime.Now.ToString()
 
             };
 
