@@ -12,9 +12,10 @@ using System;
 namespace quizlabb.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20180511133557_addeddatetime")]
+    partial class addeddatetime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,7 +211,7 @@ namespace quizlabb.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DateTime");
+                    b.Property<DateTime>("DateTime");
 
                     b.Property<string>("UserId");
 

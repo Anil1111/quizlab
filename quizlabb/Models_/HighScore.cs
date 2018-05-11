@@ -12,5 +12,6 @@ namespace quizlabb.Models_
         public string UserId { get; set; }
         public string UserName { get; set; }
         public User User { get; set; }
+        public string DateTime { get; set; }
     }
 }

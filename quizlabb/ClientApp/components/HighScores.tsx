@@ -25,7 +25,24 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
         let list = oldList.map((x, index) =>
             <li key={x + ':' + index}>{x._HighScore+' points. User:'+x.userName}</li>);
         // elementet 1 blir <li>1</li> osv.
-        return <ol>{list}</ol>;
+        return <table className='table'>
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>User</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {oldList.map((x,index) =>
+                    <tr key={x.userName+':'+index}>
+                        <td>{x._HighScore}</td>
+                        <td>{x.userName}</td>
+                        <td>{x.dateTime}</td>
+                    </tr>
+                )}
+            </tbody>
+        </table>;;
 
     }
 
@@ -56,4 +73,5 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IQuizSt
 interface HighScore {
     _HighScore: number;
     userName: string;
+    dateTime: string;
 }

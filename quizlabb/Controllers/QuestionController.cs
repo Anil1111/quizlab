@@ -87,7 +87,8 @@ namespace quizlabb.Controllers
 
                 User = user,
                 UserId = _context.Users.Where(u => u.Email == name).Single().Id,
-                UserName = name
+                UserName = name,
+                DateTime = DateTime.Now.ToShortDateString()
 
             };
 
