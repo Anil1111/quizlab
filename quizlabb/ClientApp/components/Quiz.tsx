@@ -12,6 +12,7 @@ interface IQuizState {
     counter: number;
     score: number;
     startQuiz: boolean;
+    correction: string;
 }
 
 export class Quiz extends React.Component<IQuizProps, IQuizState> {
@@ -21,7 +22,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     public constructor(props: IQuizProps) {
         super(props); {
-            this.state = { questions: [], selectedOption: "", isButtonDisable: true, counter: 0, score: 0, startQuiz: false };
+            this.state = { questions: [], selectedOption: "", isButtonDisable: true, counter: 0, score: 0, startQuiz: false, correction: "" };
         }
         this.fetchQuestion = this.fetchQuestion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,7 +62,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
             else {
 
 
-                return (
+                return (<div>
                     <ol>
                         <h2>{question[counter]}</h2>
                         <br />
@@ -79,7 +80,10 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
                         </label>
                         <br />
                         <button value="submit" className="submitBtn" disabled={this.state.isButtonDisable} onClick={this.handleSubmit}>Submit</button>
-                    </ol>);
+                    </ol><div id="infoLabel">
+                        <label id="points">{this.state.score} of {this.state.questions.length} points</label>
+                        </div>
+                </div>);
             }
         }
 
