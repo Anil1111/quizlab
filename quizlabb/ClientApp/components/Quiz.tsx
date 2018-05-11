@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 
 
 
-let name = document.getElementById('react-app')!.textContent;
+let userName = document.getElementById('react-app')!.textContent;
 interface IQuizProps { }
 interface IQuizState {
     questions: Quest[];
@@ -36,7 +36,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
         if (this.state.startQuiz == false) {
             return <div className="text-center">
-                <h1>Welcome {name}, are you ready to play the quiz?</h1>
+                <h1>Welcome {userName}, are you ready to play the quiz?</h1>
                 <button id="startQuizButton" className="submitBtn" onClick={this.startQuiz}>Start</button>
             </div>
         }
@@ -145,8 +145,8 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
 
     }
     submitScore() {
-        console.log('/Question/ReceiveScore?score=' + this.state.score + '&name=' + name);
-        fetch('/Question/ReceiveScore?score=' + this.state.score + '&name=' + name)
+        console.log('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName);
+        fetch('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName)
             .then(Response =>
                 console.log('fetch status: ', Response.status));
     }

@@ -10,7 +10,10 @@
     color: white;
 }
 
-#infoLabel{
+.main-nav .navbar ul {
+margin-top: 15px;
+}
+    #infoLabel{
     text-align: center;
 }
 
