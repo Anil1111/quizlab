@@ -25,7 +25,7 @@ namespace quizlabb.Data
 
                 new AnswerOption { Question="Which mammal is the fastest?",Option1="Gnu", Option2 = "Antilop" , Option3="Geopard",CorrectAnswer="Geopard"},
 
-                new AnswerOption { Question="Disneys movie The lion king about lion the cub Simba in Africa. What's Simbas fathers name?",Option1="Scar", Option2 = "Mustafa" , Option3="Mufasa",CorrectAnswer="Mufasa"},
+                new AnswerOption { Question="Disneys movie The lion king is about the lion cub Simba in Africa. What's Simbas fathers name?",Option1="Scar", Option2 = "Mustafa" , Option3="Mufasa",CorrectAnswer="Mufasa"},
 
                 new AnswerOption { Question="What stands LCHF for?",Option1="Low Cost High Fat", Option2 ="Low Carb High Fat", Option3= "Low Core High Fiber", CorrectAnswer="Low Carb High Fat"},
 

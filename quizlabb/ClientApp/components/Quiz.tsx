@@ -86,7 +86,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState> {
                         </label>
                         <br />
                         <input type="button" value="Submit" className="submitBtn" disabled={this.state.isSubmitButtonDisable} onClick={this.handleSubmit}></input>
-                        <input type="button" value="Next question" className="submitBtn" disabled={this.state.isNextQuestionButtonDisable} onClick={this.handleNextQuestion}></input>
+                        <input type="button" value="Next question" id="nextQuestionButton" className="submitBtn" disabled={this.state.isNextQuestionButtonDisable} onClick={this.handleNextQuestion}></input>
 
                     </ol><div id="infoLabel">
                         <label id="answerBox" style={{ color: this.state.answerColor }}>{this.state.showAnswer} </label><br />
